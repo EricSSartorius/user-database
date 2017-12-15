@@ -7,6 +7,8 @@ import IconButton from 'material-ui/IconButton';
 import Close from 'material-ui/svg-icons/navigation/close';
 import Paper from 'material-ui/Paper';
 
+import './User.css';
+
 class User extends PureComponent {
   static propTypes = {
     onDeleteUser: PropTypes.func.isRequired,
@@ -25,8 +27,15 @@ class User extends PureComponent {
       user,
     } = this.props;
 
+    const paperStyle = {
+      marginTop: '1em',
+    };
+
     return (
-      <Paper zDepth={2}>
+      <Paper
+        style={paperStyle}
+        zDepth={2}
+      >
         <ListItem
           disabled
           key={user.id}
@@ -34,24 +43,25 @@ class User extends PureComponent {
             <IconButton onClick={() => onDeleteUser(user.id)}><Close /></IconButton>
           }
           primaryText={
-            <div>
+            <div className="user-grid">
               <TextField
                 name="firstName"
                 value={user.firstName}
                 onChange={e => handleChange(e, user.id)}
-                // underlineStyle={{ borderColor: 'white' }}
+                fullWidth
               />
               <TextField
                 name="lastName"
                 value={user.lastName}
                 onChange={e => handleChange(e, user.id)}
-                underlineStyle={{ borderColor: 'white' }}
+                fullWidth
               />
               <TextField
+                className="user-address"
                 name="address"
                 value={user.address}
                 onChange={e => handleChange(e, user.id)}
-                underlineStyle={{ borderColor: 'white' }}
+                fullWidth
               />
             </div>
           }

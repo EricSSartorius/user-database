@@ -6,6 +6,8 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
+import './UserForm.css';
+
 class UserForm extends PureComponent {
   static propTypes = {
     onAddUser: PropTypes.func.isRequired,
@@ -13,6 +15,7 @@ class UserForm extends PureComponent {
 
   state = {
     userData: this.getInitialState(),
+    isInvalid: false,
   }
 
   getInitialState() {
@@ -28,13 +31,15 @@ class UserForm extends PureComponent {
     Object.keys(this.state.userData).forEach((key) => {
       if (this.state.userData[key] === '') {
         isInvalid = true;
-        console.log(isInvalid);
       }
     });
 
-    if (!isInvalid) {
+    if (isInvalid) {
+      this.setState({ isInvalid: true });
+    } else {
       this.props.onAddUser(this.state.userData);
       this.setState({ userData: this.getInitialState() });
+      this.setState({ isInvalid: false });
     }
   }
 
@@ -47,17 +52,22 @@ class UserForm extends PureComponent {
   render() {
     const { userData } = this.state;
 
+    const inputStyle = {
+      paddingLeft: '5px',
+      width: '97%',
+    };
+
     return (
-      <Paper zDepth={2}>
-        <form onSubmit={e => e.preventDefault()}>
+      <Paper zDepth={2} className="user-form">
+        <form onSubmit={e => e.preventDefault()} noValidate={!this.state.isInvalid}>
           <TextField
             name="firstName"
             value={userData.firstName}
             onChange={this.handleChange}
             hintText="First name"
             required
-            fullWidth
             underlineShow={false}
+            style={inputStyle}
           />
           <Divider />
           <TextField
@@ -65,9 +75,9 @@ class UserForm extends PureComponent {
             value={userData.lastName}
             onChange={this.handleChange}
             hintText="Last name"
-            fullWidth
             required
             underlineShow={false}
+            style={inputStyle}
           />
           <Divider />
           <TextField
@@ -76,8 +86,8 @@ class UserForm extends PureComponent {
             onChange={this.handleChange}
             hintText="Address"
             required
-            fullWidth
             underlineShow={false}
+            style={inputStyle}
           />
           <Divider />
 
@@ -87,6 +97,7 @@ class UserForm extends PureComponent {
             type="submit"
             fullWidth
             onClick={this.addUser}
+            buttonStyle={{ borderRadius: '0 0 2px 2px' }}
           />
         </form>
       </Paper>

@@ -5,6 +5,8 @@ import Subheader from 'material-ui/Subheader';
 
 import User from '../components/User';
 
+import './UserList.css';
+
 class UserList extends Component {
   static propTypes = {
     onDeleteUser: PropTypes.func.isRequired,
@@ -27,10 +29,10 @@ class UserList extends Component {
     } = this.props;
 
     return (
-      <div>
+      <div className="list-container">
         {users.size > 0 ?
           <List>
-            <Subheader>User List</Subheader>
+            <Subheader>List of Users</Subheader>
             {[...users.values()].reverse().map(user => (
               <User
                 handleChange={this.handleChange}
@@ -40,7 +42,7 @@ class UserList extends Component {
                 user={user}
               />
             ))}
-          </List> : <div>There are no users</div>
+          </List> : <div className="no-user">Use the form above to add a user</div>
         }
       </div>
     );
@@ -48,3 +50,12 @@ class UserList extends Component {
 }
 
 export default UserList;
+
+// const NoUser = styled.div`
+//   padding-top: 10vh;
+//   text-align: center;
+// `;
+
+// const ListContainer = styled.div`
+//   padding-top: 1em;
+// `;

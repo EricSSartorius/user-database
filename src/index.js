@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import './index.css';
 import AppContainer from './containers/AppContainer';
-
 import UserActions from './data/UserActions';
-
 import registerServiceWorker from './registerServiceWorker';
+
+import './index.css';
 
 ReactDOM.render(<AppContainer />, document.getElementById('root'));
 registerServiceWorker();

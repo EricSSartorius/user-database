@@ -6,6 +6,7 @@ const Header = () =>
     <header>
       <AppBar
         title="User Database"
+        style={{ position: 'fixed' }}
         showMenuIconButton={false}
       />
     </header>
