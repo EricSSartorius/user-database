@@ -33,7 +33,6 @@ class UserList extends Component {
             <Subheader>User List</Subheader>
             {[...users.values()].reverse().map(user => (
               <User
-                editUser={this.editUser}
                 handleChange={this.handleChange}
                 key={user.id}
                 onDeleteUser={onDeleteUser}

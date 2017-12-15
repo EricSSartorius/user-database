@@ -19,7 +19,6 @@ class UserStore extends ReduceStore {
         if (!action.data.firstName || !action.data.lastName || !action.data.address) {
           return state;
         }
-
         const id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
 
         return state.set(id, new UserData({

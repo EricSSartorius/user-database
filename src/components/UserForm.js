@@ -24,8 +24,18 @@ class UserForm extends PureComponent {
   }
 
   addUser = () => {
-    this.props.onAddUser(this.state.userData);
-    this.setState({ userData: this.getInitialState() });
+    let isInvalid = false;
+    Object.keys(this.state.userData).forEach((key) => {
+      if (this.state.userData[key] === '') {
+        isInvalid = true;
+        console.log(isInvalid);
+      }
+    });
+
+    if (!isInvalid) {
+      this.props.onAddUser(this.state.userData);
+      this.setState({ userData: this.getInitialState() });
+    }
   }
 
   handleChange = (event) => {
